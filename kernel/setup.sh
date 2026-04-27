@@ -1,6 +1,7 @@
 #!/bin/sh
 set -eu
 
+
 GKI_ROOT=$(pwd)
 OWNER="Samo1408"
 REPO="KernelSU"
