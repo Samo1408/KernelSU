@@ -14,7 +14,6 @@
 #ifdef CONFIG_KSU_SUSFS
 #include <linux/namei.h>
 #include <linux/susfs.h>
-#include <linux/susfs_def.h>
 #include "objsec.h"
 #endif // #ifdef CONFIG_KSU_SUSFS
 
@@ -44,10 +43,8 @@ void susfs_try_umount(uid_t new_uid)
     ksu_handle_umount(old_uid, new_uid);
 }
 
-int susfs_add_try_umount(struct st_susfs_try_umount* __user user_info)
+int susfs_add_try_umount(void __user *arg)
 {
-    // محتوى الدالة...
-
     return 0;
 }
 
