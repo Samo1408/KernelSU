@@ -25,18 +25,34 @@
 
 #include "tiny_sulog.h"
 
-#ifdef CONFIG_KSU_SUSFS_TRY_UMOUNT
+/* 
+ * SUSFS Stub functions to fix undefined symbol errors during linking.
+ * These functions are called by KernelSU but missing in the provided susfs.c.
+ */
+#ifdef CONFIG_KSU_SUSFS
 
 #ifndef __weak
 #define __weak __attribute__((weak))
 #endif
 
-/* 
- * Removed duplicate definitions of susfs_try_umount and susfs_add_try_umount 
- * as they are already defined in fs/susfs.c
- */
+// Stub for missing functions in susfs.c
+__weak void susfs_add_sus_path_loop(void __user *arg) { (void)arg; }
+__weak void susfs_add_sus_map(void __user *arg) { (void)arg; }
+__weak void susfs_set_hide_sus_mnts_for_non_su_procs(void __user *arg) { (void)arg; }
+__weak void susfs_set_avc_log_spoofing(void __user *arg) { (void)arg; }
+__weak void susfs_get_enabled_features(void __user *arg) { (void)arg; }
+__weak void susfs_show_variant(void __user *arg) { (void)arg; }
+__weak void susfs_show_version(void __user *arg) { (void)arg; }
+__weak void susfs_enable_log(void __user *arg) { (void)arg; }
 
-#endif
+// Other undefined symbols referenced by other parts of the kernel
+__weak void susfs_try_umount_all(void) { }
+__weak void ksu_try_umount(const char *mnt, bool check_mnt, int flags, uid_t uid) { (void)mnt; (void)check_mnt; (void)flags; (void)uid; }
+__weak void susfs_set_current_proc_umounted(void) { }
+__weak void susfs_run_sus_path_loop(void) { }
+__weak void susfs_start_sdcard_monitor_fn(void) { }
+
+#endif // CONFIG_KSU_SUSFS
 
 uint32_t ksuver_override = 0;
 
