@@ -31,22 +31,10 @@
 #define __weak __attribute__((weak))
 #endif
 
-__weak void ksu_handle_umount(uid_t old_uid, uid_t new_uid)
-{
-    (void)old_uid;
-    (void)new_uid;
-}
-
-void susfs_try_umount(uid_t new_uid)
-{
-    uid_t old_uid = current_uid().val;
-    ksu_handle_umount(old_uid, new_uid);
-}
-
-int susfs_add_try_umount(struct st_susfs_try_umount* __user arg)
-{
-    return 0;
-}
+/* 
+ * Removed duplicate definitions of susfs_try_umount and susfs_add_try_umount 
+ * as they are already defined in fs/susfs.c
+ */
 
 #endif
 
